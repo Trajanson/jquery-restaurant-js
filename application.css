@@ -1,8 +1,72 @@
-html {
+@font-face {
+    font-family: 'A-Love-Of-Thunder'; /*a name to be used later*/
+    src: url('a-love-of-thunder.ttf'); /*URL to font*/
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+body {
   background: url('austria.jpg') no-repeat 50% 50% fixed; 
   background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   -webkit-background-size: cover;
   background-position: bottom;
+  overflow-x: hidden;
 }
+
+.main-pic-zoomed-in {
+  
+}
+
+#content {
+  width: 30%;
+  height: 70%;
+  
+  position: absolute;
+  top: 25%;
+  bottom: 15%;
+  left: 50%;
+  right: 20%;
+  background-color: rgba(255,255,255,.65);
+
+
+  
+  margin: -70px 0 0 -170px;
+  
+}
+
+#initial-message {
+  position: absolute;
+  width: 100%;
+  top: 25%;
+  text-align: center;
+  color: rgb(219,90,95);
+
+  font-family: 'A-Love-Of-Thunder';
+  font-size: 3.25em;
+
+}
+
+#initial-message>i {
+  font-size: 1.0em ;
+}
+
+
+
+/*
+  overflow: scroll;
+  overflow-x: hidden;
+
+  background-color: rgba(219,90,95,.65);
+*/
