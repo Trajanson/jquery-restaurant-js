@@ -23,28 +23,174 @@ body {
   -webkit-background-size: cover;
   background-position: bottom;
   overflow-x: hidden;
+
+
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+  border: 0px;
+
+  font-family: 'A-Love-Of-Thunder';
+
+
 }
 
-.main-pic-zoomed-in {
-  
-}
 
 #content {
-  width: 30%;
-  height: 70%;
-  
   position: absolute;
-  top: 25%;
-  bottom: 15%;
-  left: 50%;
-  right: 20%;
-  background-color: rgba(255,255,255,.65);
+  height: 100%;
+  width: 100%;
+}
 
 
-  
-  margin: -70px 0 0 -170px;
+
+.menu {
+  position: absolute;
+  width: 13.8%;
+  right: 75.5%;
+}
+
+
+#menu-title {
+  height: 10%;
+  top: 12%;
+
+
+  color: rgb(255,255,255);
+
+  background-color: rgba(67,48,44,.65);
+  font-size: .9em;    
   
 }
+
+#menu-black-box-1 {
+  height: 3%;
+  top: 21%;
+
+  background-color: rgb(0,0,0);
+}
+
+
+#menu-first-option {
+  height: 13.5%;
+  top: 24%;
+  text-align: center;
+
+  background-color: rgba(255,255,255,.65);
+
+  box-shadow: -10px 0px 0px 0px black inset;
+  line-height: 100%;
+}
+
+#menu-black-box-2 {
+  height: 2.5%;
+  top: 37.5%;
+
+  background-color: rgb(0,0,0);
+}
+
+#menu-second-option {
+  height: 13%;
+  top: 40%;
+  text-align: center;
+
+  background-color: rgba(255,255,255,.65);
+
+  box-shadow: -10px 0px 0px 0px black inset;
+  line-height: 100%;
+  
+}
+
+#menu-black-box-3 {
+  height: 2.5%;
+  top: 53%;
+
+  background-color: rgb(0,0,0);
+}
+
+#menu-third-option {
+  height: 10%;
+  top: 55.5%;
+  text-align: center;
+
+  background-color: rgba(255,255,255,.65);
+
+  box-shadow: -10px 0px 0px 0px black inset;
+  
+  line-height: 100%;
+  
+}
+
+#menu-black-box-4 {
+  height: 2.5%;
+  top: 65.5%;
+
+  background-color: rgb(0,0,0);
+}
+
+#menu-fourth-option {
+  height: 12%;
+  top: 68%;
+  text-align: center;
+
+  background-color: rgba(255,255,255,.65);
+
+  box-shadow: -10px 0px 0px 0px black inset;
+  
+}
+
+#menu-black-box-5 {
+  height: 1.5%;
+  top: 80%;
+  
+  left: 10.7%;
+  width: 59.3%;
+
+  background-color: rgb(0,0,0);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+#display-content {
+  top: 12%;
+  height: 68%;
+  
+  left: 25%;
+  width: 45%;
+  
+  position: absolute;
+
+  background-color: rgba(255,255,255,.65);
+
+}
+
+#cart-display {
+  font-family: 'A-Love-Of-Thunder';
+  font-weight: bolder;
+  position: absolute;
+  top: 2%;
+  right: 2%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 #initial-message {
   position: absolute;
@@ -58,15 +204,13 @@ body {
 
 }
 
-#initial-message>i {
-  font-size: 1.0em ;
-}
-
-
 
 /*
-  overflow: scroll;
-  overflow-x: hidden;
 
-  background-color: rgba(219,90,95,.65);
+  top: 20%;
+  bottom: 15%;
+  left: 10%;
+  right: 20%;
+
+
 */
