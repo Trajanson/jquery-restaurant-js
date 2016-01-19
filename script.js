@@ -2,11 +2,67 @@
 var current_mode = "home";
 
 
+
 // MENU COLORS
 const SALMON_JERKY_MENU_BACKGROUND_COLOR_ON_HOVER = "rgb(147, 94, 60)";
 const TRAIL_MIX_MENU_BACKGROUND_COLOR_ON_HOVER = "rgb(67, 69, 64)";
 const ABOUT_MENU_BACKGROUND_COLOR_ON_HOVER = "rgb(147, 94, 60)";
 const CHECKOUT_MENU_BACKGROUND_COLOR_ON_HOVER = "rgb(55, 55, 65)";
+
+
+
+// CART & SHOPPING
+var cart = {jerkyInCart: 0, trailMixInCart: 0};
+
+
+var setProductPurchaseButton = function(){
+  $(".Add-To-Cart-Below-Image").mouseenter(function(){
+    $(this).css({"color": "white"});
+  });  
+  $(".Add-To-Cart-Below-Image").mouseleave(function(){
+    $(this).css({"color": "black"});
+  });
+  $(".Add-To-Cart-Below-Image").click(function(){
+    if( $(this).attr('id') == "buy-jerky" ){
+      cart["jerkyInCart"]++;
+      updateCartDisplay();
+    } else if ( $(this).attr('id') == "buy-nuts" ) {
+      cart["trailMixInCart"]++;
+      updateCartDisplay();
+    }
+  });
+};
+
+
+var updateCartDisplay = function(){
+  var numberInCart = cart["jerkyInCart"] + cart["trailMixInCart"];
+  var updatedCartDisplay;
+  if(numberInCart === 0) {
+    updatedCartDisplay = "No Items";
+  } else if (numberInCart === 1) {
+    updatedCartDisplay = "1 Item";
+  } else if (numberInCart > 1) {
+    updatedCartDisplay = numberInCart + " Items";
+  } else {
+    console.log("ERROR IN CART DISPLAY");
+  }
+  $("#cart-tracker").text(updatedCartDisplay);
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -63,6 +119,60 @@ var resizeImage = function(){
 
 
 
+// HTML of Pages
+const SALMON_JERKY_HTML = `
+          <div class='content-title'><p>Artisanal,<br>Handcrafted <b>Salmon Jerky</b></p></div>
+          
+          <div class = 'content-text'>
+              <div id='jerky-image-container' class="product-image-container">
+                  <img id='jerky-image' class='product-picture' src='Smoked_Salmon.jpg'/>
+                  <br>&nbsp;&nbsp;<b><span id='buy-jerky' class='Add-To-Cart-Below-Image clickable'>Add to Cart</span></b>
+              </div>
+              <div class='product-description'>
+                  Paleo Trek's Salmon are wild caught by native Kanak fishermen off the coast of New Caledonia. These pristine waters of the South Pacific ensure a mouth-watering quality of freshness unmatched in dried seafood culinary artistry. High in Protein. Low in Fat.
+              </div>
+          </div>
+`;
+
+const TRAIL_MIX_HTML =`
+          <div class='content-title'><p>Bold, Uncomplicated,<br>Re-conceived <b>Trail Mix</b></p></div>
+          
+          <div class = 'content-text'>
+              <div id='nuts-image-container' class="product-image-container">
+                  <img id='nuts-image' class='product-picture' src='nuts.jpg'/>
+                  <br>&nbsp;&nbsp;<b><span id='buy-nuts' class='Add-To-Cart-Below-Image clickable'>Add to Cart</span></b>
+              </div>
+              <div class='product-description'>
+                  Deep into the lush jungles of equatorial Peru, warmed and nourished by fertile soil and a tropical sun, the seedlings of your trail mix exist to concentrate nutrients into power-packed morsels of tantalizing goodness. With pure-strength Cacao and exotic 'super-foods', this modern take on trail mix will power you past that next horizon.
+              </div>
+          </div>
+`;
+
+const ABOUT_HTML = `
+
+`;
+
+const CART_HTML = `
+
+`;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -74,6 +184,23 @@ var resizeImage = function(){
 
 
 $(document).ready(function(){
+
+  /// TEMP FUNCTIONS UNTIL COMPLETE
+    setProductPurchaseButton();
+  //////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
   
 
   // BEGIN IMAGE RESIZING EVENT ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -82,11 +209,71 @@ $(document).ready(function(){
   $(window).resize(function(){
     resizeImage();
   });
-  
-  
-  
-  // END IMAGE RESIZING EVENT //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // END IMAGE RESIZING EVENT //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  // BEGIN NAVIGATION CONTROLS /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  
+  // Salmon Jerky Page
+  $('#menu-option-1').click(function(){
+    $('#display-content').html(SALMON_JERKY_HTML);
+    resizeImage();
+    current_mode = "salmon jerky";
+    setProductPurchaseButton();
+  });
+  
+  // Trail Mix Page
+  $('#menu-option-2').click(function(){
+    $('#display-content').html(TRAIL_MIX_HTML);
+    resizeImage();
+    current_mode = "trail mix";
+    setProductPurchaseButton();
+  });  
+  
+  // About Page
+  $('#menu-option-3').click(function(){
+    $('#display-content').html(ABOUT_HTML);
+    resizeImage();
+    current_mode = "about";
+    setProductPurchaseButton();
+  });
+  
+  // Checkout Page
+  $('#menu-option-4').click(function(){
+    $('#display-content').html(CART_HTML);
+    resizeImage();
+    current_mode = "cart";
+    setProductPurchaseButton();
+  });  
+
+  // END NAVIGATION CONTROLS ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

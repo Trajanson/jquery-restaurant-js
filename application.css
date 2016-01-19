@@ -219,15 +219,15 @@ body {
   float: right;
     display: inline;
     
-float: right;
-width: 103px;
-margin: 0 0 10px 10px;
-background-color: rgba(163,182,163,.75);
-padding: 10px;
-border-top: 1px solid #999;
-border-right: 2px solid #555;
-border-bottom: 2px solid #555;
-border-left: 1px solid #999;
+  float: right;
+  width: 103px;
+  margin: 0 0 10px 10px;
+  background-color: rgba(163,182,163,.75);
+  padding: 10px;
+  border-top: 1px solid #999;
+  border-right: 2px solid #555;
+  border-bottom: 2px solid #555;
+  border-left: 1px solid #999;
     
     
 
