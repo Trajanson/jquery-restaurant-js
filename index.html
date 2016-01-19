@@ -17,7 +17,7 @@
         <div id="display-content">
           <div class = 'content-text up-higher'>
           
-            <table style="width:100%">
+            <table id="checkout-table" style="width:100%">
               <thead>
                 <tr>
                   <th class="table-header">Product</th>
@@ -28,10 +28,10 @@
               </thead>
               <tbody>
                 <tr id="jerky-checkout-row">
-                  <td>Artisinal Salmon Jerky<br><span id="size-declaration">Size: 1 oz</span></td>
+                  <td>Artisinal Salmon Jerky<br><span class="size-declaration">Size: 1 oz</span></td>
                   <td>$19.95</td>
                   <td>
-                      <input id="jerky-quantity-shown-in-cart" class="quantity-selection" type="number" step="1" min="0" value="1" style="width:50px;">
+                      <input id="jerky-quantity-shown-in-cart" class="quantity-selection" type="number" step="1" min="0" max="999" value="1" style="width:50px;">
                   </td>
                   <td>$<span id="jerky-subtotal">19.95</span></td>
                 </tr>
@@ -39,7 +39,7 @@
                 <tr id="nuts-checkout-row">
                   <td>Imaginative Trail Mix<br><span class="size-declaration">Size: 1.5 oz</span></td>
                   <td>$9.95</td>
-                  <td><input id="nuts-quantity-shown-in-cart" class="quantity-selection" type="number" step="1" min="0" value="1" style="width:50px;"></td>
+                  <td><input id="nuts-quantity-shown-in-cart" class="quantity-selection" type="number" step="1" min="0" max="999" value="1" style="width:50px;"></td>
                   <td>$<span id="nuts-subtotal">9.95</span></td>
                 </tr>           
                 
@@ -56,18 +56,23 @@
                 
                 <tr>
                   <td>&nbsp;</td>
-                  <td colspan="2">Shipping:&nbsp;&nbsp;<i>Flat Rate:</i></td>
-                  <td>$4.95</td>
+                  <td class="shipping-row" colspan="2">Shipping</td>
+                  <td class="shipping-row" id="shipping-price">$4.95</td>
                 </tr>
                 
                 <tr>
                   <td>&nbsp;</td>
-                  <td colspan="2">Total:</td>
+                  <td colspan="2">Total</td>
                   <td>$<span id="total-total">34.85</span></td>
                 </tr>                
                 
               </tbody>
             </table>
+          
+            <div id="flat-rate-declaration-box"><span id="flat-rate-declaration">
+                <h3>Flat Rate Shipping</h3>
+                <p>Paleo Trek will ship for <b>one</b> price to <u>anywhere</u> in the world!</p>
+            </span></div>
           
           </div>       
         </div>    

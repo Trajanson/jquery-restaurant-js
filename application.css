@@ -262,6 +262,52 @@ border-left: 2px solid #555;
 
 
 
+#checkout-table {
+  font-size: 1.55vw;
+}
+
+.table-header{
+  font-size: 2vw;
+  text-align: left;
+}
+
+
+.size-declaration {
+  font-style: italic;
+  font-size: 1.4vw;
+}
+
+.shipping-row{
+  cursor: pointer;
+}
+
+#flat-rate-declaration-box {
+  position: absolute;
+  right: -43%;
+  background-color: rgba(255,255,255,.9);
+  width: 30%;
+  top: 34%;
+  padding: 0% 1% 0% 2%;
+  border-style: inset;
+  border-color: black;
+}
+
+
+#flat-rate-declaration {
+  font-size: 1.35vw;
+  color: black;
+}
+
+
+
+
+
+
+
+
+
+
+
 
 
 

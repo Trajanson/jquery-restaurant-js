@@ -41,8 +41,10 @@ var setProductPurchaseButton = function(){
 
 
 var updateCartDisplay = function(){
-  var numberInCart = cart["jerkyInCart"] + cart["trailMixInCart"];
+  var numberInCart;
   var updatedCartDisplay;
+
+  numberInCart = Number(cart["jerkyInCart"]) + Number(cart["trailMixInCart"]);
   if(numberInCart === 0) {
     updatedCartDisplay = "No Items";
   } else if (numberInCart === 1) {
@@ -127,17 +129,41 @@ var renderCart = function(){
     $("#total-total").text( (finalTotal).toFixed(2).toString() );    
     
   }
+  updateCartDisplay();
       
 };
 
 
+var bindEventsToCartPage = function(){
+  updateJerkyValueInCartView();
+  updateTrailMixValueInCartView();
+  $("#flat-rate-declaration-box").hide(); // to appear later  
+  createFlatRateShippingPopup();
+};
 
 
+var updateJerkyValueInCartView = function(){
+  $("#jerky-quantity-shown-in-cart").click(function(){
+    cart["jerkyInCart"] = Number($(this).val());
+    renderCart();
+  });  
+};
 
+var updateTrailMixValueInCartView = function(){
+  $("#nuts-quantity-shown-in-cart").click(function(){
+    cart["trailMixInCart"] = Number($(this).val());
+    renderCart();
+  });  
+};
 
-
-
-
+var createFlatRateShippingPopup = function(){
+  $(".shipping-row").mouseenter(function(){
+    $("#flat-rate-declaration-box").hide().fadeIn(500);
+  });
+  $(".shipping-row").mouseleave(function(){
+    $("#flat-rate-declaration-box").hide();
+  });  
+}
 
 
 
@@ -259,29 +285,29 @@ const ABOUT_HTML = `
 const CART_HTML = `
           <div class = 'content-text up-higher'>
           
-            <table style="width:100%">
+            <table id="checkout-table" style="width:100%">
               <thead>
                 <tr>
-                  <th>Product</th>
-                  <th>Price</th>
-                  <th>Quantity</th>
-                  <th>Total</th>
+                  <th class="table-header">Product</th>
+                  <th class="table-header">Price</th>
+                  <th class="table-header">Quantity</th>
+                  <th class="table-header">Total</th>
                 </tr>
               </thead>
               <tbody>
                 <tr id="jerky-checkout-row">
-                  <td>Artisinal Salmon Jerky<br>Size: 1 oz</td>
+                  <td>Artisinal Salmon Jerky<br><span class="size-declaration">Size: 1 oz</span></td>
                   <td>$19.95</td>
                   <td>
-                      <input id="jerky-quantity-shown-in-cart" class="quantity-selection" type="number" step="1" min="0" value="1" style="width:50px;">
+                      <input id="jerky-quantity-shown-in-cart" class="quantity-selection" type="number" step="1" min="0" max="999" value="1" style="width:50px;">
                   </td>
                   <td>$<span id="jerky-subtotal">19.95</span></td>
                 </tr>
                 
                 <tr id="nuts-checkout-row">
-                  <td>Imaginative Trail Mix<br>Size: 1.5 oz</td>
+                  <td>Imaginative Trail Mix<br><span class="size-declaration">Size: 1.5 oz</span></td>
                   <td>$9.95</td>
-                  <td><input id="nuts-quantity-shown-in-cart" class="quantity-selection" type="number" step="1" min="0" value="1" style="width:50px;"></td>
+                  <td><input id="nuts-quantity-shown-in-cart" class="quantity-selection" type="number" step="1" min="0" max="999" value="1" style="width:50px;"></td>
                   <td>$<span id="nuts-subtotal">9.95</span></td>
                 </tr>           
                 
@@ -298,18 +324,23 @@ const CART_HTML = `
                 
                 <tr>
                   <td>&nbsp;</td>
-                  <td colspan="2">Shipping:&nbsp;&nbsp;<i>Flat Rate:</i></td>
-                  <td>$4.95</td>
+                  <td class="shipping-row" colspan="2">Shipping</td>
+                  <td class="shipping-row" id="shipping-price">$4.95</td>
                 </tr>
                 
                 <tr>
                   <td>&nbsp;</td>
-                  <td colspan="2">Total:</td>
+                  <td colspan="2">Total</td>
                   <td>$<span id="total-total">34.85</span></td>
                 </tr>                
                 
               </tbody>
             </table>
+          
+            <div id="flat-rate-declaration-box"><span id="flat-rate-declaration">
+                <h3>Flat Rate Shipping</h3>
+                <p>Paleo Trek will ship for <b>one</b> price to <u>anywhere</u> in the world!</p>
+            </span></div>
           
           </div>
 `;
@@ -386,11 +417,13 @@ $(document).ready(function(){
   $(window).resize(function(){
     resizeImage();
   });
-    // END IMAGE RESIZING EVENT //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  // END IMAGE RESIZING EVENT //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////  
   
-  
-  
+
+
+
+
   
   
   
@@ -432,6 +465,7 @@ $(document).ready(function(){
     $('#display-content').html(CART_HTML);
     renderCart();
     current_mode = "cart";
+    bindEventsToCartPage();
   });  
 
   // END NAVIGATION CONTROLS ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
