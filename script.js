@@ -4,10 +4,12 @@ var current_mode = "home";
 
 
 // MENU COLORS
-const SALMON_JERKY_MENU_BACKGROUND_COLOR_ON_HOVER = "rgb(147, 94, 60)";
-const TRAIL_MIX_MENU_BACKGROUND_COLOR_ON_HOVER = "rgb(67, 69, 64)";
-const ABOUT_MENU_BACKGROUND_COLOR_ON_HOVER = "rgb(147, 94, 60)";
-const CHECKOUT_MENU_BACKGROUND_COLOR_ON_HOVER = "rgb(55, 55, 65)";
+const SALMON_JERKY_MENU_BACKGROUND_COLOR_ON_HOVER = "rgb(147, 94, 60)"; 
+const TRAIL_MIX_MENU_BACKGROUND_COLOR_ON_HOVER = "rgb(105, 110, 52)";
+const ABOUT_MENU_BACKGROUND_COLOR_ON_HOVER = "rgb(67, 69, 64)";
+const CHECKOUT_MENU_BACKGROUND_COLOR_ON_HOVER = "rgb(187, 126, 37)";
+
+const STANDARD_MENU_BACKGROUND = "rgba(255,255,255,.65)";
 
 
 
@@ -154,6 +156,54 @@ const ABOUT_HTML = `
 
 const CART_HTML = `
 
+          <div class = 'content-text up-higher'>
+          
+            <table style="width:100%">
+              <thead>
+                <tr>
+                  <th>Product</th>
+                  <th>Price</th>
+                  <th>Quantity</th>
+                  <th>Total</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Artisinal Salmon Jerky<br>Size: 1 oz</td>
+                  <td>$19.95</td>
+                  <td>1</td>
+                  <td>$19.95</td>
+                </tr>
+                
+                <tr>
+                  <td>Imaginative Trail Mix<br>Size: 1.5 oz</td>
+                  <td>$9.95</td>
+                  <td>1</td>
+                  <td>$9.95</td>
+                </tr>           
+                
+                <tr>
+                  <td colspan="2">&nbsp;</td>
+                  <td>Subtotal</td>
+                  <td>$29.90</td>
+                </tr>
+                
+                <tr>
+                  <td colspan="2">&nbsp;</td>
+                  <td>Shipping:</td>
+                  <td>Flat Rate: $4.95</td>
+                </tr>
+                
+                <tr>
+                  <td colspan="2">&nbsp;</td>
+                  <td>Total:</td>
+                  <td>$34.85</td>
+                </tr>                
+                
+              </tbody>
+            </table>
+          
+          </div>
 `;
 
 
@@ -263,6 +313,55 @@ $(document).ready(function(){
   // END NAVIGATION CONTROLS ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  // BEGIN MENU HOVER EVENTS ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  $("#menu-option-1").mouseenter(function(){
+    $(this).css({"background-color": SALMON_JERKY_MENU_BACKGROUND_COLOR_ON_HOVER});
+  });
+  $("#menu-option-1").mouseleave(function(){
+    $(this).css({"background-color": STANDARD_MENU_BACKGROUND});
+  });  
+  
+  $("#menu-option-2").mouseenter(function(){
+    $(this).css({"background-color": TRAIL_MIX_MENU_BACKGROUND_COLOR_ON_HOVER});
+  });
+  $("#menu-option-2").mouseleave(function(){
+    $(this).css({"background-color": STANDARD_MENU_BACKGROUND});
+  });    
+  
+  $("#menu-option-3").mouseenter(function(){
+    $(this).css({"background-color": ABOUT_MENU_BACKGROUND_COLOR_ON_HOVER});
+  });
+  $("#menu-option-3").mouseleave(function(){
+    $(this).css({"background-color": STANDARD_MENU_BACKGROUND});
+  });      
+  
+  $("#menu-option-4").mouseenter(function(){
+    $(this).css({"background-color": CHECKOUT_MENU_BACKGROUND_COLOR_ON_HOVER});
+  });
+  $("#menu-option-4").mouseleave(function(){
+    $(this).css({"background-color": STANDARD_MENU_BACKGROUND});
+  });        
+  
+  
+  // END MENU HOVER CONTROLS ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  
+  
+  
   
   
   
