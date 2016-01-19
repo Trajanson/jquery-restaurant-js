@@ -48,6 +48,7 @@ body {
   width: 13.8%;
   right: 75.5%;
   color: black;
+  font-size: 1.6vw;
 }
 
 
@@ -59,8 +60,25 @@ body {
   color: rgb(255,255,255);
 
   background-color: rgba(67,48,44,.65);
-  font-size: .9em;    
-  
+  font-size: 2vw;    
+}
+
+#menu-title-text-whole{
+  top: 18%;
+}
+
+#first-menu-title-inner-span{
+  position: absolute;
+  right: 50%;
+  top: -12%;
+}
+
+#second-menu-title-inner-span{
+  transform: rotate(-13deg);
+  position: absolute;
+  right: 0%;
+  top:-7%;
+  font-size: 4vw;
 }
 
 #menu-black-box-1 {
@@ -183,6 +201,7 @@ body {
   position: absolute;
   top: 2%;
   right: 2%;
+  font-size: 3.65vh;  
 }
 
 
@@ -344,7 +363,7 @@ border-left: 2px solid #555;
 /* USE THESE CLASSES IN JQUERY */
 
 .delicious {
-  right: -12%;
+  right: -75%;
 }
 
 .up-higher {

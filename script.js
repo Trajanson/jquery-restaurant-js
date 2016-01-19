@@ -466,7 +466,15 @@ $(document).ready(function(){
     renderCart();
     current_mode = "cart";
     bindEventsToCartPage();
-  });  
+  });
+  
+  // Top Right Cart
+  $('#cart-display').click(function(){
+    $('#display-content').html(CART_HTML);
+    renderCart();
+    current_mode = "cart";
+    bindEventsToCartPage();    
+  });
 
   // END NAVIGATION CONTROLS ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -536,7 +544,7 @@ $(document).ready(function(){
   
   
   
-/*  
+  
 
   // BEGIN INITIAL MESSAGING SEQUENCE //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -563,11 +571,13 @@ $(document).ready(function(){
     $("#adjectives").text("Nutritious").css({"color": "brown", "font-size": "1.1em"});
   }).delay(TIME_FOR_SECOND_ADJECTIVE_TO_CHANGE).fadeOut(0).fadeIn(0, function(){
     $("#adjectives").text("Delicious").css({"color": "rgb(95,219,90)", "font-size": "1.2em"});
+    $('#initial-message').css({ "right": "-5%", "top": "21%" });
   }).delay(TIME_FOR_THIRD_ADJECTIVE_TO_CHANGE).fadeOut(0).fadeIn(0, function(){
+    $('#initial-message').css({ "right": "0%", "top": "25%" });
     $("#adjectives").text("Organic").css({"color": "red", "font-size": "1.3em"});
   }).delay(TIME_FOR_FOURTH_ADJECTIVE_TO_CHANGE).fadeOut(0).fadeIn(0, function(){
     $('#initial-message').css({ "top": "17%" });
-    $("#adjectives").text("Anywhere").css({"color": "rgb(219,90,95)", "font-size": "1.5em"});
+    $("#adjectives").text("Anywhere").css({"color": "rgb(219,90,95)", "font-size": "1.63em"});
   });
   
   // step 5) remove message
@@ -578,7 +588,6 @@ $(document).ready(function(){
 
   // END INITIAL MESSAGING SEQUENCE ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-*/
 
   
 })
