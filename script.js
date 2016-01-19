@@ -22,17 +22,17 @@ var cart = {jerkyInCart: 0, trailMixInCart: 0};
 
 
 var setProductPurchaseButton = function(){
-  $(".Add-To-Cart-Below-Image").mouseenter(function(){
-    $(this).css({"color": "white"});
+  $(".product-image-container").mouseenter(function(){
+    $(".Add-To-Cart-Below-Image").css({"color": "white"});
   });  
-  $(".Add-To-Cart-Below-Image").mouseleave(function(){
-    $(this).css({"color": "black"});
+  $(".product-image-container").mouseleave(function(){
+    $(".Add-To-Cart-Below-Image").css({"color": "black"});
   });
-  $(".Add-To-Cart-Below-Image").click(function(){
-    if( $(this).attr('id') == "buy-jerky" ){
+  $(".product-image-container").click(function(){
+    if( $(this).attr('id') == "jerky-image-container" ){
       cart["jerkyInCart"]++;
       updateCartDisplay();
-    } else if ( $(this).attr('id') == "buy-nuts" ) {
+    } else if ( $(this).attr('id') == "nuts-image-container" ) {
       cart["trailMixInCart"]++;
       updateCartDisplay();
     }
@@ -254,7 +254,7 @@ const SALMON_JERKY_HTML = `
           <div class='content-title'><p>Artisanal,<br>Handcrafted <b>Salmon Jerky</b></p></div>
           
           <div class = 'content-text'>
-              <div id='jerky-image-container' class="product-image-container">
+              <div id='jerky-image-container' class="product-image-container clickable">
                   <img id='jerky-image' class='product-picture' src='Smoked_Salmon.jpg'/>
                   <br>&nbsp;&nbsp;<b><span id='buy-jerky' class='Add-To-Cart-Below-Image clickable'>Add to Cart</span></b>
               </div>
@@ -268,17 +268,27 @@ const TRAIL_MIX_HTML =`
           <div class='content-title'><p>Bold, Uncomplicated,<br>Re-conceived <b>Trail Mix</b></p></div>
           
           <div class = 'content-text'>
-              <div id='nuts-image-container' class="product-image-container">
+              <div id='nuts-image-container' class="product-image-container clickable">
                   <img id='nuts-image' class='product-picture' src='nuts.jpg'/>
                   <br>&nbsp;&nbsp;<b><span id='buy-nuts' class='Add-To-Cart-Below-Image clickable'>Add to Cart</span></b>
               </div>
               <div class='product-description'>
-                  Deep into the lush jungles of equatorial Peru, warmed and nourished by fertile soil and a tropical sun, the seedlings of your trail mix exist to concentrate nutrients into power-packed morsels of tantalizing goodness. With pure-strength Cacao and exotic 'super-foods', this modern take on trail mix will power you past that next horizon.
+                  Deep into the lush jungles of equatorial Peru, warmed and nourished by fertile soil and tropical sun, the seedlings of your trail mix exist to concentrate nutrients into power-packed morsels of tantalizing goodness. With pure-strength Cacao and exotic 'super-foods', this modern take on trail mix will power you past that next horizon.
               </div>
           </div>
 `;
 
 const ABOUT_HTML = `
+          <div class = 'content-text'>
+            Credits:
+            <ul>
+              <li><a href="http://www.dafont.com/a-love-of-thunder.font" target="_blank">'A Love of Thunder' Font Created by Cumberland Fontworks*</a></li>
+              <li><a href="https://commons.wikimedia.org/wiki/File:Smoked_Salmon.jpg" target="_blank">Smoked Salmon picture created by	GEMalone*</a></li>
+              <li><a href="https://commons.wikimedia.org/wiki/File:Studentenfutter_01.JPG" target="_blank">Studentenfutter (trail mix) picture created by Thogru*</a></li>
+            </ul>
+            <a href="README.md" target="_blank">*Terms of Use can be found in ReadMe</a>
+
+          </div>
 
 `;
 
@@ -571,9 +581,9 @@ $(document).ready(function(){
     $("#adjectives").text("Nutritious").css({"color": "brown", "font-size": "1.1em"});
   }).delay(TIME_FOR_SECOND_ADJECTIVE_TO_CHANGE).fadeOut(0).fadeIn(0, function(){
     $("#adjectives").text("Delicious").css({"color": "rgb(95,219,90)", "font-size": "1.2em"});
-    $('#initial-message').css({ "right": "-5%", "top": "21%" });
+    $('#initial-message').css({ "right": "-4.5%", "top": "22%" });
   }).delay(TIME_FOR_THIRD_ADJECTIVE_TO_CHANGE).fadeOut(0).fadeIn(0, function(){
-    $('#initial-message').css({ "right": "0%", "top": "25%" });
+    $('#initial-message').css({ "right": "0%", "top": "26.5%" });
     $("#adjectives").text("Organic").css({"color": "red", "font-size": "1.3em"});
   }).delay(TIME_FOR_FOURTH_ADJECTIVE_TO_CHANGE).fadeOut(0).fadeIn(0, function(){
     $('#initial-message').css({ "top": "17%" });

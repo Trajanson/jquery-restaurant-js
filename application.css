@@ -240,7 +240,7 @@ body {
     
   float: right;
   width: 103px;
-  margin: 0 0 10px 10px;
+  margin: 0 0 12px 10px;
   background-color: rgba(163,182,163,.75);
   padding: 10px;
   border-top: 1px solid #999;
@@ -267,7 +267,7 @@ border-left: 2px solid #555;
      display: inline;
      clear: left;
      top: 0px;
-  
+         font-size: 1.5vmax;
 }
 
 
