@@ -1,4 +1,26 @@
-var current_time = Date.now();
+  // MODES  - display different screens
+var current_mode = "home";
+
+
+// MENU COLORS
+const SALMON_JERKY_MENU_BACKGROUND_COLOR_ON_HOVER = "rgb(147, 94, 60)";
+const TRAIL_MIX_MENU_BACKGROUND_COLOR_ON_HOVER = "rgb(67, 69, 64)";
+const ABOUT_MENU_BACKGROUND_COLOR_ON_HOVER = "rgb(147, 94, 60)";
+const CHECKOUT_MENU_BACKGROUND_COLOR_ON_HOVER = "rgb(55, 55, 65)";
+
+
+
+
+
+
+
+
+
+
+
+
+
+  // BEGINNING MESSAGE SETTINGS
 
 const TIME_TO_VIEW_PHOTO_IN_ISOLATION     = 1500;
 
@@ -21,11 +43,23 @@ const TIME_FROM_START_UNTIL_CONTENT_APPEARS = TIME_FROM_START_UNTIL_INITIAL_MESS
 
 
 
+// IMAGE RESISZING
+
+const WIDTH_OF_PRODUCT_IMAGE_AS_PERCENT_OF_DISPLAY_CONTENT = 27 /100;
+
+var displayContentWidth,
+    widthOfProductPicture,
+    widthOfProductPictureString;
+
+var resizeImage = function(){
+  displayContentWidth = $("#display-content").width();
+  widthOfProductPicture = WIDTH_OF_PRODUCT_IMAGE_AS_PERCENT_OF_DISPLAY_CONTENT * displayContentWidth;
+  widthOfProductPictureString = widthOfProductPicture+"px";
+  $(".product-picture").width(widthOfProductPicture);
+  $(".product-image-container").css({"min-width": widthOfProductPictureString, "max-width": widthOfProductPictureString});
+}
 
 
-
-  // MODES  - display different screens
-var current_mode = "home";
 
 
 
@@ -41,26 +75,34 @@ var current_mode = "home";
 
 $(document).ready(function(){
   
+
+  // BEGIN IMAGE RESIZING EVENT ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  resizeImage();
+  $(window).resize(function(){
+    resizeImage();
+  });
   
+  
+  
+  // END IMAGE RESIZING EVENT //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////  
   
   
   
   
   
 /*  
+
+  // BEGIN INITIAL MESSAGING SEQUENCE //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
   // Initial Message HTML
   //    "Delivering Wholesome Food to Your Final Frontier"
   //     - will flash various adjectives before disappearing to show the primary page content
   $("body").prepend('<div id="initial-message"><span class="missing">Delivering</span><br> <span id="adjectives">Wholesome</span><span class="missing">&nbsp;&nbsp;Food<br>to Your Final Frontier...</span></div>');
   
   
-  
-  
-  
-  
-  
-  
-  // BEGIN INITIAL MESSAGING SEQUENCE
   
   // step 1) hide content (it will appear after the sequence)
   $('#content').hide();
@@ -90,8 +132,8 @@ $(document).ready(function(){
   // step 6) show content
   $('#content').delay(TIME_FROM_START_UNTIL_CONTENT_APPEARS).fadeIn(TIME_FOR_DESCRIPTION_TO_DISAPPEAR);
 
-  // END INITIAL MESSAGING SEQUENCE
-
+  // END INITIAL MESSAGING SEQUENCE ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 */
 
   
