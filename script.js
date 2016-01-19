@@ -14,6 +14,10 @@ const STANDARD_MENU_BACKGROUND = "rgba(255,255,255,.65)";
 
 
 // CART & SHOPPING
+const PRICE_OF_SALMON = 19.95;
+const PRICE_OF_TRAIL_MIX = 9.95;
+const PRICE_OF_SHIPPING = 4.95;
+
 var cart = {jerkyInCart: 0, trailMixInCart: 0};
 
 
@@ -50,6 +54,104 @@ var updateCartDisplay = function(){
   }
   $("#cart-tracker").text(updatedCartDisplay);
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Render Cart Page
+var renderCart = function(){
+  var numberOfJerkyInCart = cart["jerkyInCart"],
+      numberOfNutsInCart  = cart["trailMixInCart"],
+      numberOfItemsInCart = numberOfJerkyInCart + numberOfNutsInCart;
+      
+  if (numberOfItemsInCart === 0){
+    $('#display-content').html(EMPTY_CART_HTML);
+  } else {
+    // remove product row if product is not in cart
+    if(numberOfJerkyInCart === 0){
+      $("#jerky-checkout-row").hide();
+    }
+    if(numberOfNutsInCart === 0){
+      $("#nuts-checkout-row").hide();
+    }    
+    // set the amount shown in the cart to the amount actually in the cart
+    $("#jerky-quantity-shown-in-cart").attr("value", numberOfJerkyInCart);
+    $("#nuts-quantity-shown-in-cart").attr("value", numberOfNutsInCart);
+    
+    // set the product subtotals equal to the price * quantity
+    var jerkySubtotal = PRICE_OF_SALMON * numberOfJerkyInCart;
+    var nutsSubtotal = PRICE_OF_TRAIL_MIX * numberOfNutsInCart;
+    $("#jerky-subtotal").text( (jerkySubtotal).toFixed(2).toString() );
+    $("#nuts-subtotal").text( (nutsSubtotal).toFixed(2).toString() );
+    
+    // set the total subtotal as the sum of subtotals
+    var totalSubtotal = jerkySubtotal + nutsSubtotal;
+    $("#total-subtotal").text( (totalSubtotal).toFixed(2).toString() );
+    
+    // set the total as the sum of the subtotal and shipping
+    var finalTotal = totalSubtotal + PRICE_OF_SHIPPING;
+    $("#total-total").text( (finalTotal).toFixed(2).toString() );    
+    
+  }
+      
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -155,7 +257,6 @@ const ABOUT_HTML = `
 `;
 
 const CART_HTML = `
-
           <div class = 'content-text up-higher'>
           
             <table style="width:100%">
@@ -168,36 +269,43 @@ const CART_HTML = `
                 </tr>
               </thead>
               <tbody>
-                <tr>
+                <tr id="jerky-checkout-row">
                   <td>Artisinal Salmon Jerky<br>Size: 1 oz</td>
                   <td>$19.95</td>
-                  <td>1</td>
-                  <td>$19.95</td>
+                  <td>
+                      <input id="jerky-quantity-shown-in-cart" class="quantity-selection" type="number" step="1" min="0" value="1" style="width:50px;">
+                  </td>
+                  <td>$<span id="jerky-subtotal">19.95</span></td>
                 </tr>
                 
-                <tr>
+                <tr id="nuts-checkout-row">
                   <td>Imaginative Trail Mix<br>Size: 1.5 oz</td>
                   <td>$9.95</td>
-                  <td>1</td>
-                  <td>$9.95</td>
+                  <td><input id="nuts-quantity-shown-in-cart" class="quantity-selection" type="number" step="1" min="0" value="1" style="width:50px;"></td>
+                  <td>$<span id="nuts-subtotal">9.95</span></td>
                 </tr>           
                 
                 <tr>
-                  <td colspan="2">&nbsp;</td>
-                  <td>Subtotal</td>
-                  <td>$29.90</td>
+                    <td>&nbsp;</td>
+                    <td colspan="4"></td>
                 </tr>
                 
                 <tr>
-                  <td colspan="2">&nbsp;</td>
-                  <td>Shipping:</td>
-                  <td>Flat Rate: $4.95</td>
+                  <td>&nbsp;</td>
+                  <td colspan="2">Subtotal</td>
+                  <td>$<span id="total-subtotal">29.90</span></td>
                 </tr>
                 
                 <tr>
-                  <td colspan="2">&nbsp;</td>
-                  <td>Total:</td>
-                  <td>$34.85</td>
+                  <td>&nbsp;</td>
+                  <td colspan="2">Shipping:&nbsp;&nbsp;<i>Flat Rate:</i></td>
+                  <td>$4.95</td>
+                </tr>
+                
+                <tr>
+                  <td>&nbsp;</td>
+                  <td colspan="2">Total:</td>
+                  <td>$<span id="total-total">34.85</span></td>
                 </tr>                
                 
               </tbody>
@@ -205,6 +313,25 @@ const CART_HTML = `
           
           </div>
 `;
+
+const EMPTY_CART_HTML = `
+
+          <div class = 'content-text up-higher'>
+          
+            <p>Sorry! There does not appear to be anything in your cart.</p>
+          
+          </div>
+`;
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -297,17 +424,14 @@ $(document).ready(function(){
   // About Page
   $('#menu-option-3').click(function(){
     $('#display-content').html(ABOUT_HTML);
-    resizeImage();
     current_mode = "about";
-    setProductPurchaseButton();
   });
   
   // Checkout Page
   $('#menu-option-4').click(function(){
     $('#display-content').html(CART_HTML);
-    resizeImage();
+    renderCart();
     current_mode = "cart";
-    setProductPurchaseButton();
   });  
 
   // END NAVIGATION CONTROLS ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
