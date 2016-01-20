@@ -3,7 +3,7 @@ var current_mode = "home";
 
 
 // MENU COLORS
-const SALMON_JERKY_MENU_BACKGROUND_COLOR_ON_HOVER = "rgb(147, 94, 60)"; 
+const SALMON_JERKY_MENU_BACKGROUND_COLOR_ON_HOVER = "rgb(147, 94, 60)";
 const TRAIL_MIX_MENU_BACKGROUND_COLOR_ON_HOVER = "rgb(105, 110, 52)";
 const ABOUT_MENU_BACKGROUND_COLOR_ON_HOVER = "rgb(67, 69, 64)";
 const CHECKOUT_MENU_BACKGROUND_COLOR_ON_HOVER = "rgb(187, 126, 37)";
@@ -23,7 +23,7 @@ var cart = {jerkyInCart: 0, trailMixInCart: 0};
 var setProductPurchaseButton = function(){
   $(".product-image-container").mouseenter(function(){
     $(".Add-To-Cart-Below-Image").css({"color": "white"});
-  });  
+  });
   $(".product-image-container").mouseleave(function(){
     $(".Add-To-Cart-Below-Image").css({"color": "black"});
   });
@@ -98,7 +98,7 @@ var renderCart = function(){
   var numberOfJerkyInCart = cart["jerkyInCart"],
       numberOfNutsInCart  = cart["trailMixInCart"],
       numberOfItemsInCart = numberOfJerkyInCart + numberOfNutsInCart;
-      
+
   if (numberOfItemsInCart === 0){
     $('#display-content').html(EMPTY_CART_HTML);
   } else {
@@ -108,36 +108,37 @@ var renderCart = function(){
     }
     if(numberOfNutsInCart === 0){
       $("#nuts-checkout-row").hide();
-    }    
+    }
     // set the amount shown in the cart to the amount actually in the cart
     $("#jerky-quantity-shown-in-cart").attr("value", numberOfJerkyInCart);
     $("#nuts-quantity-shown-in-cart").attr("value", numberOfNutsInCart);
-    
+
     // set the product subtotals equal to the price * quantity
     var jerkySubtotal = PRICE_OF_SALMON * numberOfJerkyInCart;
     var nutsSubtotal = PRICE_OF_TRAIL_MIX * numberOfNutsInCart;
     $("#jerky-subtotal").text( (jerkySubtotal).toFixed(2).toString() );
     $("#nuts-subtotal").text( (nutsSubtotal).toFixed(2).toString() );
-    
+
     // set the total subtotal as the sum of subtotals
     var totalSubtotal = jerkySubtotal + nutsSubtotal;
     $("#total-subtotal").text( (totalSubtotal).toFixed(2).toString() );
-    
+
     // set the total as the sum of the subtotal and shipping
     var finalTotal = totalSubtotal + PRICE_OF_SHIPPING;
-    $("#total-total").text( (finalTotal).toFixed(2).toString() );    
-    
+    $("#total-total").text( (finalTotal).toFixed(2).toString() );
+
   }
   updateCartDisplay();
-      
+
 };
 
 
 var bindEventsToCartPage = function(){
   updateJerkyValueInCartView();
   updateTrailMixValueInCartView();
-  $("#flat-rate-declaration-box").hide(); // to appear later  
+  $("#flat-rate-declaration-box").hide(); // to appear later
   createFlatRateShippingPopup();
+  disableCartSubmitOrderButton();
 };
 
 
@@ -145,14 +146,14 @@ var updateJerkyValueInCartView = function(){
   $("#jerky-quantity-shown-in-cart").click(function(){
     cart["jerkyInCart"] = Number($(this).val());
     renderCart();
-  });  
+  });
 };
 
 var updateTrailMixValueInCartView = function(){
   $("#nuts-quantity-shown-in-cart").click(function(){
     cart["trailMixInCart"] = Number($(this).val());
     renderCart();
-  });  
+  });
 };
 
 var createFlatRateShippingPopup = function(){
@@ -161,11 +162,15 @@ var createFlatRateShippingPopup = function(){
   });
   $(".shipping-row").mouseleave(function(){
     $("#flat-rate-declaration-box").hide();
-  });  
+  });
 }
 
 
-
+var disableCartSubmitOrderButton = function(){
+  $("#submit-order-button").click(function(event){
+    event.preventDefault();
+  });  
+}
 
 
 
@@ -212,7 +217,7 @@ const TIME_TO_VIEW_PHOTO_IN_ISOLATION     = 1500;
 const TIME_FOR_DESCRIPTION_TO_FADE_IN     = 3500;
 
 const TIME_FROM_START_UNTIL_INITIAL_MESSAGE_LOADS    = TIME_TO_VIEW_PHOTO_IN_ISOLATION + TIME_FOR_DESCRIPTION_TO_FADE_IN;
-  
+
 const TIME_FOR_FIRST_ADJECTIVE_TO_CHANGE  = 2000;
 const TIME_FOR_SECOND_ADJECTIVE_TO_CHANGE = 1500;
 const TIME_FOR_THIRD_ADJECTIVE_TO_CHANGE  = 1500;
@@ -260,7 +265,7 @@ const LINE_SPACING_OF_PRODUCT_CONTENT_TEXT_AS_PERCENT_OF_DISPLAY_CONTENT_DIV = 7
 var resizeImage = function(){
   var displayContentWidth,
       widthOfProductPicture,
-      widthOfProductPictureString;  
+      widthOfProductPictureString;
   displayContentWidth = $("#display-content").width();
   widthOfProductPicture = WIDTH_OF_PRODUCT_IMAGE_AS_PERCENT_OF_DISPLAY_CONTENT * displayContentWidth;
   widthOfProductPictureString = widthOfProductPicture+"px";
@@ -309,7 +314,7 @@ var checkScreenSize = function(){
 // HTML of Pages
 const SALMON_JERKY_HTML = `
           <div class='content-title'><p>Artisanal,<br>Handcrafted <b>Salmon Jerky</b></p></div>
-          
+
           <div class = 'content-text'>
               <div id='jerky-image-container' class="product-image-container clickable">
                   <img id='jerky-image' class='product-picture' src='Smoked_Salmon.jpg'/>
@@ -323,7 +328,7 @@ const SALMON_JERKY_HTML = `
 
 const TRAIL_MIX_HTML =`
         <div class='content-title'><p>Bold, Uncomplicated,<br>Re-conceived <b>Trail Mix</b></p></div>
-        
+
         <div class = 'content-text'>
             <div id='nuts-image-container' class="product-image-container clickable">
                 <img id='nuts-image' class='product-picture' src='nuts.jpg'/>
@@ -344,7 +349,7 @@ const ABOUT_HTML = `
               <p class="about-text">Credits:
               <ul class="about-text">
                 <li><a href="http://www.dafont.com/a-love-of-thunder.font" target="_blank">'A Love of Thunder' Font Created by Cumberland Fontworks*</a></li>
-                <li><a href="http://picography.co/photos/winding-roads/" target="_blank">WINDING ROADS (Background Image) by Marko Berndt</a></li>
+                <li><a href="http://picography.co/photos/winding-roads/" target="_blank">WINDING ROADS (Background Image) by Marko Berndt*</a></li>
                 <li><a href="https://commons.wikimedia.org/wiki/File:Smoked_Salmon.jpg" target="_blank">Smoked Salmon picture created by	GEMalone*</a></li>
                 <li><a href="https://commons.wikimedia.org/wiki/File:Studentenfutter_01.JPG" target="_blank">Studentenfutter (trail mix) picture created by Thogru*</a></li>
               </ul>
@@ -356,7 +361,7 @@ const ABOUT_HTML = `
 
 const CART_HTML = `
           <div class = 'content-text up-higher'>
-          
+
             <table id="checkout-table" style="width:100%">
               <thead>
                 <tr>
@@ -375,60 +380,60 @@ const CART_HTML = `
                   </td>
                   <td>$<span id="jerky-subtotal">19.95</span></td>
                 </tr>
-                
+
                 <tr id="nuts-checkout-row">
                   <td>Imaginative Trail Mix<br><span class="size-declaration">Size: 1.5 oz</span></td>
                   <td>$9.95</td>
                   <td><input id="nuts-quantity-shown-in-cart" class="quantity-selection" type="number" step="1" min="0" max="999" value="1" style="width:50px;"></td>
                   <td>$<span id="nuts-subtotal">9.95</span></td>
-                </tr>           
-                
+                </tr>
+
                 <tr>
                     <td>&nbsp;</td>
                     <td colspan="4"></td>
                 </tr>
-                
+
                 <tr>
                   <td>&nbsp;</td>
                   <td colspan="2">Subtotal</td>
                   <td>$<span id="total-subtotal">29.90</span></td>
                 </tr>
-                
+
                 <tr>
                   <td>&nbsp;</td>
                   <td class="shipping-row" colspan="2">Shipping</td>
                   <td class="shipping-row" id="shipping-price">$4.95</td>
                 </tr>
-                
+
                 <tr>
                   <td>&nbsp;</td>
                   <td colspan="2">Total</td>
                   <td>$<span id="total-total">34.85</span></td>
-                </tr>                
-                
+                </tr>
+
               </tbody>
             </table>
-            
+
             <div>
               <form>
-                <input id="submit-order-button" type="submit" value="Confirm Order" disabled>
+                <input id="submit-order-button" type="submit" value="Confirm Order">
               </form>
             </div>
-            
+
             <div id="flat-rate-declaration-box"><span id="flat-rate-declaration">
                 <h3>Flat Rate Shipping</h3>
                 <p>Paleo Trek will ship for <b>one</b> price to <u>anywhere</u> in the world!</p>
             </span></div>
-          
-          </div>       
+
+          </div>
 `;
 
 const EMPTY_CART_HTML = `
 
           <div class = 'content-text up-higher empty-cart'>
-          
+
             <p>Sorry! There does not appear to be anything in your cart.</p>
-          
+
           </div>
 `;
 
@@ -478,15 +483,15 @@ $(document).ready(function(){
 
       setProductPurchaseButton();
 
-  
-  
-  
-  
-  
-  
-  
-    
-  
+
+
+
+
+
+
+
+
+
     // BEGIN IMAGE RESIZING EVENT ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     resizeImage();
@@ -494,8 +499,8 @@ $(document).ready(function(){
     resizeLogo();
     $('#screen-warning').hide();
     checkScreenSize();
-    
-    
+
+
     $(window).resize(function(){
       resizeImage();
       resizeContentTextHeight();
@@ -503,26 +508,26 @@ $(document).ready(function(){
       checkScreenSize();
     });
     // END IMAGE RESIZING EVENT //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////  
-    
-  
-  
-  
-  
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     // BEGIN NAVIGATION CONTROLS /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    
+
     // Salmon Jerky Page
     $('#menu-option-1').click(function(){
       $('#display-content').html(SALMON_JERKY_HTML);
@@ -531,7 +536,7 @@ $(document).ready(function(){
       setProductPurchaseButton();
       resizeContentTextHeight();
     });
-    
+
     // Trail Mix Page
     $('#menu-option-2').click(function(){
       $('#display-content').html(TRAIL_MIX_HTML);
@@ -539,15 +544,15 @@ $(document).ready(function(){
       current_mode = "trail mix";
       setProductPurchaseButton();
       resizeContentTextHeight();
-    });  
-    
+    });
+
     // About Page
     $('#menu-option-3').click(function(){
       $('#display-content').html(ABOUT_HTML);
       current_mode = "about";
       resizeContentTextHeight();
     });
-    
+
     // Checkout Page
     $('#menu-option-4').click(function(){
       $('#display-content').html(CART_HTML);
@@ -555,31 +560,37 @@ $(document).ready(function(){
       current_mode = "cart";
       bindEventsToCartPage();
     });
-    
+
     // Top Right Cart
     $('#cart-display').click(function(){
       $('#display-content').html(CART_HTML);
       renderCart();
       current_mode = "cart";
-      bindEventsToCartPage();    
+      bindEventsToCartPage();
     });
-  
+
     // END NAVIGATION CONTROLS ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     // BEGIN MENU HOVER EVENTS ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     $("#menu-option-1").mouseenter(function(){
@@ -587,72 +598,72 @@ $(document).ready(function(){
     });
     $("#menu-option-1").mouseleave(function(){
       $(this).css({"background-color": STANDARD_MENU_BACKGROUND});
-    });  
-    
+    });
+
     $("#menu-option-2").mouseenter(function(){
       $(this).css({"background-color": TRAIL_MIX_MENU_BACKGROUND_COLOR_ON_HOVER});
     });
     $("#menu-option-2").mouseleave(function(){
       $(this).css({"background-color": STANDARD_MENU_BACKGROUND});
-    });    
-    
+    });
+
     $("#menu-option-3").mouseenter(function(){
       $(this).css({"background-color": ABOUT_MENU_BACKGROUND_COLOR_ON_HOVER});
     });
     $("#menu-option-3").mouseleave(function(){
       $(this).css({"background-color": STANDARD_MENU_BACKGROUND});
-    });      
-    
+    });
+
     $("#menu-option-4").mouseenter(function(){
       $(this).css({"background-color": CHECKOUT_MENU_BACKGROUND_COLOR_ON_HOVER});
     });
     $("#menu-option-4").mouseleave(function(){
       $(this).css({"background-color": STANDARD_MENU_BACKGROUND});
-    });        
-    
-    
+    });
+
+
     // END MENU HOVER CONTROLS ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
 
-  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     // BEGIN INITIAL MESSAGING SEQUENCE //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  
+
     // Initial Message HTML
     //    "Delivering Wholesome Food to Your Final Frontier"
     //     - will flash various adjectives before disappearing to show the primary page content
     $("body").prepend('<div id="initial-message"><span class="missing">Delivering</span><br> <span id="adjectives">Wholesome</span><span class="missing">&nbsp;&nbsp;Food<br>to Your Final Frontier...</span></div>');
-    
-    
-    
+
+
+
     // step 1) hide content (it will appear after the sequence)
     $('#content').hide();
-  
+
     // step 2) show message
     $('#initial-message').delay(TIME_TO_VIEW_PHOTO_IN_ISOLATION).hide().fadeIn(TIME_FOR_DESCRIPTION_TO_FADE_IN);
-    
+
     // step 3) remove non-adjectives
     $('.missing').delay(TIME_FROM_START_UNTIL_INITIAL_MESSAGE_LOADS).fadeOut(TIME_FOR_FIRST_ADJECTIVE_TO_CHANGE);
-  
-  
+
+
     // step 4) flash adjectives
     $("#adjectives").delay(TIME_FROM_START_UNTIL_INITIAL_MESSAGE_LOADS + TIME_FOR_FIRST_ADJECTIVE_TO_CHANGE).fadeOut(0).fadeIn(0, function(){
       $("#adjectives").text("Nutritious").css({"color": "brown", "font-size": "1.1em"});
@@ -666,16 +677,16 @@ $(document).ready(function(){
       $('#initial-message').css({ "top": "17%" });
       $("#adjectives").text("Anywhere").css({"color": "rgb(219,90,95)", "font-size": "1.63em"});
     });
-    
+
     // step 5) remove message
     $('#initial-message').delay(TIME_FOR_MESSAGE_TO_WAIT_WHILE_ADJECTIVE_ANIMATIONS_OCCUR).fadeOut(TIME_FOR_DESCRIPTION_TO_DISAPPEAR);
-    
+
     // step 6) show content
     $('#content').delay(TIME_FROM_START_UNTIL_CONTENT_APPEARS).fadeIn(TIME_FOR_DESCRIPTION_TO_DISAPPEAR);
-  
+
     // END INITIAL MESSAGING SEQUENCE ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  
+
 
 })
 
@@ -695,7 +706,7 @@ var startingHTML2 = `
 var startingHTML3 = `
         <div id="display-content">
           <div class='content-title'><p>Artisanal,<br>Handcrafted <b>Salmon Jerky</b></p></div>
-          
+
           <div class = 'content-text'>
               <div id='jerky-image-container' class="product-image-container clickable">
                   <img id='jerky-image' class='product-picture' src='Smoked_Salmon.jpg'/>
@@ -705,7 +716,7 @@ var startingHTML3 = `
                   Paleo Trek's Salmon are wild caught by native Kanak fishermen off the coast of New Caledonia. These pristine waters of the South Pacific ensure a mouth-watering quality of freshness unmatched in dried seafood culinary artistry. High in Protein. Low in Fat.
               </div>
           </div>
-        </div>    
+        </div>
 
 `;
 
@@ -714,9 +725,9 @@ var startingHTML4 = `
             <div id="logo-pic-div"><img id="logo-pic" src="Logo.png"/></div>
             <!--<span id="menu-title-text-whole"><span id="first-menu-title-inner-span">Paleo</span><span id="second-menu-title-inner-span">Trek</span></span> -->
         </div>
-        
+
         <div id="menu-black-box-1" class="menu"></div>
-        
+
         <div id="menu-option-1" class="menu clickable">
             <h4>Artisanal<br>Salmon Jerky</h4>
         </div>

@@ -7,6 +7,11 @@ Features:
 - Interactive Popup Indicating Free Shipping
 - Website Built Almost Entirely Through jQuery (as directed through Project Specs)
 
+Noted Issues:
+
+- jQuery's .addClass(), .removeClass(), .toggleClass() often failed to function properly, .css was found to function properly in all cases
+- Exhausted all leads on dynamically resizing text - em, %, vh, vw, vmax, vmin were all tried unsuccessfully (easily the most tedious and exhausting component of the challenge).
+
 
 
 Credits:
