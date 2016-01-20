@@ -192,7 +192,6 @@ body {
   margin: 0px 0px 0px 0px;
   padding: 0px 0px 0px 0px;
   border: 0px;  
-
 }
 
 #cart-display {
@@ -204,6 +203,19 @@ body {
   font-size: 3.65vh;  
 }
 
+#submit-order-button{
+    color: white;
+    border-radius: 4px;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+    background: rgb(195, 127, 43);
+    position: absolute;
+    width: 53%;
+    height: 15%;
+    bottom: -20%;
+    right: 0%;
+    font: 1vw;
+}
+
 
 
 
@@ -212,7 +224,7 @@ body {
 
 
 .content-title{
-  font-size: 1.3em;
+  font-size: 4.75vmin;
   position: absolute;
   left: 3%;
   top: -3%;
@@ -253,27 +265,37 @@ body {
 }
 
 .product-image-container>img{
-border-top: 2px solid #555;
-border-right: 1px solid #999;
-border-bottom: 1px solid #999;
-border-left: 2px solid #555;
-  
+  border-top: 2px solid #555;
+  border-right: 1px solid #999;
+  border-bottom: 1px solid #999;
+  border-left: 2px solid #555;
+}
+
+
+.Add-To-Cart-Below-Image {
+  font-size: 3.78vmin;
 }
 
 
 
 .product-description{
-    position: relative;
-     display: inline;
-     clear: left;
-     top: 0px;
-         font-size: 1.5vmax;
+  position: relative;
+  display: inline;
+  clear: left;
+  top: 0px;
+  font-size: 3.5vmin;
 }
 
 
 
+#jerky-product-description{
+  font-size: 3vmin;
+}
 
 
+#trail-mix-product-description{
+  font-size: 1.2vw;
+}
 
 
 
@@ -319,6 +341,9 @@ border-left: 2px solid #555;
 
 
 
+.empty-cart {
+  font-size: 2vw;
+}
 
 
 
@@ -329,13 +354,31 @@ border-left: 2px solid #555;
 
 
 
+#screen-warning{
+  font-size: 2em;
+  color: white;
+  height: 30%;
+  width: 30%;
+}
 
 
 
+hr {
+    display: block;
+    margin-top: -.5em;
+    margin-bottom: .3em;  
+}
 
 
 
+#about-content-text{
+    position: absolute;
+    left: 3%;
+}
 
+.about-text{
+  font-size: 3.5vh;
+}
 
 
 

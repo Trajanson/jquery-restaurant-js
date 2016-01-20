@@ -10,6 +10,11 @@
     <script src="jquery.js"></script>
     
     <div id="content">
+      <div id="screen-warning">
+        Please view this content in landscape mode.
+      </div>
+      
+      
         <div id="cart-display" class="clickable">
             <span id="cart-tracker">No Items</span> in Cart
         </div>
@@ -68,7 +73,13 @@
                 
               </tbody>
             </table>
-          
+            
+            <div>
+              <form>
+                <input id="submit-order-button" type="submit" value="Confirm Order" disabled>
+              </form>
+            </div>
+            
             <div id="flat-rate-declaration-box"><span id="flat-rate-declaration">
                 <h3>Flat Rate Shipping</h3>
                 <p>Paleo Trek will ship for <b>one</b> price to <u>anywhere</u> in the world!</p>
@@ -81,7 +92,8 @@
     
     
         <div id="menu-title" class="menu">
-            <span id="menu-title-text-whole"><span id="first-menu-title-inner-span">Paleo</span><span id="second-menu-title-inner-span">Trek</span></span>
+            <div id="logo-pic-div"><img id="logo-pic" src="Logo.png"/></div>
+            <!--<span id="menu-title-text-whole"><span id="first-menu-title-inner-span">Paleo</span><span id="second-menu-title-inner-span">Trek</span></span> -->
         </div>
         
         <div id="menu-black-box-1" class="menu"></div>

@@ -229,15 +229,39 @@ const TIME_FROM_START_UNTIL_CONTENT_APPEARS = TIME_FROM_START_UNTIL_INITIAL_MESS
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // IMAGE RESISZING
 
 const WIDTH_OF_PRODUCT_IMAGE_AS_PERCENT_OF_DISPLAY_CONTENT = 27 /100;
-
-var displayContentWidth,
-    widthOfProductPicture,
-    widthOfProductPictureString;
+const LINE_SPACING_OF_PRODUCT_CONTENT_TEXT_AS_PERCENT_OF_DISPLAY_CONTENT_DIV = 7 /100;
 
 var resizeImage = function(){
+  var displayContentWidth,
+      widthOfProductPicture,
+      widthOfProductPictureString;  
   displayContentWidth = $("#display-content").width();
   widthOfProductPicture = WIDTH_OF_PRODUCT_IMAGE_AS_PERCENT_OF_DISPLAY_CONTENT * displayContentWidth;
   widthOfProductPictureString = widthOfProductPicture+"px";
@@ -245,7 +269,41 @@ var resizeImage = function(){
   $(".product-image-container").css({"min-width": widthOfProductPictureString, "max-width": widthOfProductPictureString});
 }
 
+var resizeLogo = function() {
+  var windowLength, // 13.8%;
+      windowHeight,  // 10%
+      lengthOfLogo,
+      heightOfLogo;
+  windowLength = $(window).width();
+  windowHeight = $(window).height();
+  lengthOfLogo = (windowLength * .138).toString() + "px";
+  heightOfLogo = (windowHeight * .1).toString() + "px";
+  $("#logo-pic").width(lengthOfLogo);
+  $("#logo-pic").height(heightOfLogo);
+}
 
+
+var resizeContentTextHeight = function() {
+/*  var displayContentHeight,
+      determinedLineHeightOfText,
+      lineHeightOfContentText;
+  displayContentHeight = $("#display-content").height();
+  determinedLineHeightOfText = (LINE_SPACING_OF_PRODUCT_CONTENT_TEXT_AS_PERCENT_OF_DISPLAY_CONTENT_DIV * displayContentHeight);
+  lineHeightOfContentText = ( determinedLineHeightOfText ).toString() + "px";
+  $(".content-text").css({"line-height": lineHeightOfContentText});
+*/
+}
+
+var checkScreenSize = function(){
+  if( $(window).height() > $(window).width() ){
+    console.log("this was hit");
+    $("#content").hide();
+    $("#screen-warning").show();
+  } else{
+    $("#content").show();
+    $('#screen-warning').hide();
+  }
+}
 
 
 
@@ -258,36 +316,40 @@ const SALMON_JERKY_HTML = `
                   <img id='jerky-image' class='product-picture' src='Smoked_Salmon.jpg'/>
                   <br>&nbsp;&nbsp;<b><span id='buy-jerky' class='Add-To-Cart-Below-Image clickable'>Add to Cart</span></b>
               </div>
-              <div class='product-description'>
+              <div class='product-description' id="jerky-product-description">
                   Paleo Trek's Salmon are wild caught by native Kanak fishermen off the coast of New Caledonia. These pristine waters of the South Pacific ensure a mouth-watering quality of freshness unmatched in dried seafood culinary artistry. High in Protein. Low in Fat.
               </div>
           </div>
 `;
 
 const TRAIL_MIX_HTML =`
-          <div class='content-title'><p>Bold, Uncomplicated,<br>Re-conceived <b>Trail Mix</b></p></div>
-          
-          <div class = 'content-text'>
-              <div id='nuts-image-container' class="product-image-container clickable">
-                  <img id='nuts-image' class='product-picture' src='nuts.jpg'/>
-                  <br>&nbsp;&nbsp;<b><span id='buy-nuts' class='Add-To-Cart-Below-Image clickable'>Add to Cart</span></b>
-              </div>
-              <div class='product-description'>
-                  Deep into the lush jungles of equatorial Peru, warmed and nourished by fertile soil and tropical sun, the seedlings of your trail mix exist to concentrate nutrients into power-packed morsels of tantalizing goodness. With pure-strength Cacao and exotic 'super-foods', this modern take on trail mix will power you past that next horizon.
-              </div>
-          </div>
+        <div class='content-title'><p>Bold, Uncomplicated,<br>Re-conceived <b>Trail Mix</b></p></div>
+        
+        <div class = 'content-text'>
+            <div id='nuts-image-container' class="product-image-container clickable">
+                <img id='nuts-image' class='product-picture' src='nuts.jpg'/>
+                <br>&nbsp;&nbsp;<b><span id='buy-nuts' class='Add-To-Cart-Below-Image clickable'>Add to Cart</span></b>
+            </div>
+            <div class='product-description' id="trail-mix-product-description">
+                Deep into the lush jungles of equatorial Peru, warmed and nourished by fertile soil and tropical sun, the seedlings of your trail mix exist to concentrate nutrients into power-packed morsels of tantalizing goodness. With pure-strength Cacao and exotic 'super-foods', this modern take on trail mix will power you past that next horizon.
+            </div>
+        </div>
+
 `;
 
 const ABOUT_HTML = `
-          <div class = 'content-text'>
-            Credits:
-            <ul>
-              <li><a href="http://www.dafont.com/a-love-of-thunder.font" target="_blank">'A Love of Thunder' Font Created by Cumberland Fontworks*</a></li>
-              <li><a href="https://commons.wikimedia.org/wiki/File:Smoked_Salmon.jpg" target="_blank">Smoked Salmon picture created by	GEMalone*</a></li>
-              <li><a href="https://commons.wikimedia.org/wiki/File:Studentenfutter_01.JPG" target="_blank">Studentenfutter (trail mix) picture created by Thogru*</a></li>
-            </ul>
-            <a href="README.md" target="_blank">*Terms of Use can be found in ReadMe</a>
-
+          <div id = 'about-content-text'>
+            <p class="about-text">
+              Designwork: <a href="http://www.trajanson.com" target="_blank">www.Trajanson.com</a><br>
+              The Odin Project: <a href="http://www.theodinproject.com/javascript-and-jquery/manipulating-the-dom-with-jquery?ref=lnav" target="_blank">Manipulating the DOM with jQuery</a></p><hr>
+              <p class="about-text">Credits:
+              <ul class="about-text">
+                <li><a href="http://www.dafont.com/a-love-of-thunder.font" target="_blank">'A Love of Thunder' Font Created by Cumberland Fontworks*</a></li>
+                <li><a href="https://commons.wikimedia.org/wiki/File:Smoked_Salmon.jpg" target="_blank">Smoked Salmon picture created by	GEMalone*</a></li>
+                <li><a href="https://commons.wikimedia.org/wiki/File:Studentenfutter_01.JPG" target="_blank">Studentenfutter (trail mix) picture created by Thogru*</a></li>
+              </ul>
+              <a class="about-text" href="README.md" target="_blank">*Terms of Use can be found in ReadMe</a>
+            </p>
           </div>
 
 `;
@@ -346,18 +408,24 @@ const CART_HTML = `
                 
               </tbody>
             </table>
-          
+            
+            <div>
+              <form>
+                <input id="submit-order-button" type="submit" value="Confirm Order" disabled>
+              </form>
+            </div>
+            
             <div id="flat-rate-declaration-box"><span id="flat-rate-declaration">
                 <h3>Flat Rate Shipping</h3>
                 <p>Paleo Trek will ship for <b>one</b> price to <u>anywhere</u> in the world!</p>
             </span></div>
           
-          </div>
+          </div>       
 `;
 
 const EMPTY_CART_HTML = `
 
-          <div class = 'content-text up-higher'>
+          <div class = 'content-text up-higher empty-cart'>
           
             <p>Sorry! There does not appear to be anything in your cart.</p>
           
@@ -424,8 +492,17 @@ $(document).ready(function(){
   // BEGIN IMAGE RESIZING EVENT ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   resizeImage();
+  resizeContentTextHeight();
+  resizeLogo();
+  $('#screen-warning').hide();
+  checkScreenSize();
+  
+  
   $(window).resize(function(){
     resizeImage();
+    resizeContentTextHeight();
+    resizeLogo();
+    checkScreenSize();
   });
   // END IMAGE RESIZING EVENT //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////  
@@ -454,6 +531,7 @@ $(document).ready(function(){
     resizeImage();
     current_mode = "salmon jerky";
     setProductPurchaseButton();
+    resizeContentTextHeight();
   });
   
   // Trail Mix Page
@@ -462,12 +540,14 @@ $(document).ready(function(){
     resizeImage();
     current_mode = "trail mix";
     setProductPurchaseButton();
+    resizeContentTextHeight();
   });  
   
   // About Page
   $('#menu-option-3').click(function(){
     $('#display-content').html(ABOUT_HTML);
     current_mode = "about";
+    resizeContentTextHeight();
   });
   
   // Checkout Page
@@ -553,7 +633,7 @@ $(document).ready(function(){
   
   
   
-  
+/*  
   
 
   // BEGIN INITIAL MESSAGING SEQUENCE //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -599,5 +679,6 @@ $(document).ready(function(){
   // END INITIAL MESSAGING SEQUENCE ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+*/
   
 })
