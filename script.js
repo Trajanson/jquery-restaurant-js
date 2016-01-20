@@ -1,4 +1,3 @@
-  // MODES  - display different screens
 var current_mode = "home";
 
 
@@ -345,6 +344,7 @@ const ABOUT_HTML = `
               <p class="about-text">Credits:
               <ul class="about-text">
                 <li><a href="http://www.dafont.com/a-love-of-thunder.font" target="_blank">'A Love of Thunder' Font Created by Cumberland Fontworks*</a></li>
+                <li><a href="http://picography.co/photos/winding-roads/" target="_blank">WINDING ROADS (Background Image) by Marko Berndt</a></li>
                 <li><a href="https://commons.wikimedia.org/wiki/File:Smoked_Salmon.jpg" target="_blank">Smoked Salmon picture created by	GEMalone*</a></li>
                 <li><a href="https://commons.wikimedia.org/wiki/File:Studentenfutter_01.JPG" target="_blank">Studentenfutter (trail mix) picture created by Thogru*</a></li>
               </ul>
@@ -468,217 +468,276 @@ const EMPTY_CART_HTML = `
 
 
 
-
 $(document).ready(function(){
-
-  /// TEMP FUNCTIONS UNTIL COMPLETE
-    setProductPurchaseButton();
-  //////////////////////////////////////////////////////////
-  //////////////////////////////////////////////////////////
-  //////////////////////////////////////////////////////////
-  //////////////////////////////////////////////////////////
-  //////////////////////////////////////////////////////////
-  //////////////////////////////////////////////////////////
+  $("#content").append(startingHTML2);
+  $(startingHTML3).appendTo("#content");
+  $("#content").append(startingHTML4);
+  $("#content").prepend(startingHTML1);
 
 
 
-
-
-
-
+      setProductPurchaseButton();
 
   
-
-  // BEGIN IMAGE RESIZING EVENT ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  resizeImage();
-  resizeContentTextHeight();
-  resizeLogo();
-  $('#screen-warning').hide();
-  checkScreenSize();
   
   
-  $(window).resize(function(){
+  
+  
+  
+  
+    
+  
+    // BEGIN IMAGE RESIZING EVENT ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     resizeImage();
     resizeContentTextHeight();
     resizeLogo();
+    $('#screen-warning').hide();
     checkScreenSize();
-  });
-  // END IMAGE RESIZING EVENT //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////  
+    
+    
+    $(window).resize(function(){
+      resizeImage();
+      resizeContentTextHeight();
+      resizeLogo();
+      checkScreenSize();
+    });
+    // END IMAGE RESIZING EVENT //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////  
+    
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    // BEGIN NAVIGATION CONTROLS /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    
+    // Salmon Jerky Page
+    $('#menu-option-1').click(function(){
+      $('#display-content').html(SALMON_JERKY_HTML);
+      resizeImage();
+      current_mode = "salmon jerky";
+      setProductPurchaseButton();
+      resizeContentTextHeight();
+    });
+    
+    // Trail Mix Page
+    $('#menu-option-2').click(function(){
+      $('#display-content').html(TRAIL_MIX_HTML);
+      resizeImage();
+      current_mode = "trail mix";
+      setProductPurchaseButton();
+      resizeContentTextHeight();
+    });  
+    
+    // About Page
+    $('#menu-option-3').click(function(){
+      $('#display-content').html(ABOUT_HTML);
+      current_mode = "about";
+      resizeContentTextHeight();
+    });
+    
+    // Checkout Page
+    $('#menu-option-4').click(function(){
+      $('#display-content').html(CART_HTML);
+      renderCart();
+      current_mode = "cart";
+      bindEventsToCartPage();
+    });
+    
+    // Top Right Cart
+    $('#cart-display').click(function(){
+      $('#display-content').html(CART_HTML);
+      renderCart();
+      current_mode = "cart";
+      bindEventsToCartPage();    
+    });
+  
+    // END NAVIGATION CONTROLS ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    // BEGIN MENU HOVER EVENTS ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    $("#menu-option-1").mouseenter(function(){
+      $(this).css({"background-color": SALMON_JERKY_MENU_BACKGROUND_COLOR_ON_HOVER});
+    });
+    $("#menu-option-1").mouseleave(function(){
+      $(this).css({"background-color": STANDARD_MENU_BACKGROUND});
+    });  
+    
+    $("#menu-option-2").mouseenter(function(){
+      $(this).css({"background-color": TRAIL_MIX_MENU_BACKGROUND_COLOR_ON_HOVER});
+    });
+    $("#menu-option-2").mouseleave(function(){
+      $(this).css({"background-color": STANDARD_MENU_BACKGROUND});
+    });    
+    
+    $("#menu-option-3").mouseenter(function(){
+      $(this).css({"background-color": ABOUT_MENU_BACKGROUND_COLOR_ON_HOVER});
+    });
+    $("#menu-option-3").mouseleave(function(){
+      $(this).css({"background-color": STANDARD_MENU_BACKGROUND});
+    });      
+    
+    $("#menu-option-4").mouseenter(function(){
+      $(this).css({"background-color": CHECKOUT_MENU_BACKGROUND_COLOR_ON_HOVER});
+    });
+    $("#menu-option-4").mouseleave(function(){
+      $(this).css({"background-color": STANDARD_MENU_BACKGROUND});
+    });        
+    
+    
+    // END MENU HOVER CONTROLS ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+  
+    // BEGIN INITIAL MESSAGING SEQUENCE //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  
+    // Initial Message HTML
+    //    "Delivering Wholesome Food to Your Final Frontier"
+    //     - will flash various adjectives before disappearing to show the primary page content
+    $("body").prepend('<div id="initial-message"><span class="missing">Delivering</span><br> <span id="adjectives">Wholesome</span><span class="missing">&nbsp;&nbsp;Food<br>to Your Final Frontier...</span></div>');
+    
+    
+    
+    // step 1) hide content (it will appear after the sequence)
+    $('#content').hide();
+  
+    // step 2) show message
+    $('#initial-message').delay(TIME_TO_VIEW_PHOTO_IN_ISOLATION).hide().fadeIn(TIME_FOR_DESCRIPTION_TO_FADE_IN);
+    
+    // step 3) remove non-adjectives
+    $('.missing').delay(TIME_FROM_START_UNTIL_INITIAL_MESSAGE_LOADS).fadeOut(TIME_FOR_FIRST_ADJECTIVE_TO_CHANGE);
+  
+  
+    // step 4) flash adjectives
+    $("#adjectives").delay(TIME_FROM_START_UNTIL_INITIAL_MESSAGE_LOADS + TIME_FOR_FIRST_ADJECTIVE_TO_CHANGE).fadeOut(0).fadeIn(0, function(){
+      $("#adjectives").text("Nutritious").css({"color": "brown", "font-size": "1.1em"});
+    }).delay(TIME_FOR_SECOND_ADJECTIVE_TO_CHANGE).fadeOut(0).fadeIn(0, function(){
+      $("#adjectives").text("Delicious").css({"color": "rgb(95,219,90)", "font-size": "1.2em"});
+      $('#initial-message').css({ "right": "-4.5%", "top": "22%" });
+    }).delay(TIME_FOR_THIRD_ADJECTIVE_TO_CHANGE).fadeOut(0).fadeIn(0, function(){
+      $('#initial-message').css({ "right": "0%", "top": "26.5%" });
+      $("#adjectives").text("Organic").css({"color": "red", "font-size": "1.3em"});
+    }).delay(TIME_FOR_FOURTH_ADJECTIVE_TO_CHANGE).fadeOut(0).fadeIn(0, function(){
+      $('#initial-message').css({ "top": "17%" });
+      $("#adjectives").text("Anywhere").css({"color": "rgb(219,90,95)", "font-size": "1.63em"});
+    });
+    
+    // step 5) remove message
+    $('#initial-message').delay(TIME_FOR_MESSAGE_TO_WAIT_WHILE_ADJECTIVE_ANIMATIONS_OCCUR).fadeOut(TIME_FOR_DESCRIPTION_TO_DISAPPEAR);
+    
+    // step 6) show content
+    $('#content').delay(TIME_FROM_START_UNTIL_CONTENT_APPEARS).fadeIn(TIME_FOR_DESCRIPTION_TO_DISAPPEAR);
+  
+    // END INITIAL MESSAGING SEQUENCE ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   
 
-
-
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  // BEGIN NAVIGATION CONTROLS /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  
-  // Salmon Jerky Page
-  $('#menu-option-1').click(function(){
-    $('#display-content').html(SALMON_JERKY_HTML);
-    resizeImage();
-    current_mode = "salmon jerky";
-    setProductPurchaseButton();
-    resizeContentTextHeight();
-  });
-  
-  // Trail Mix Page
-  $('#menu-option-2').click(function(){
-    $('#display-content').html(TRAIL_MIX_HTML);
-    resizeImage();
-    current_mode = "trail mix";
-    setProductPurchaseButton();
-    resizeContentTextHeight();
-  });  
-  
-  // About Page
-  $('#menu-option-3').click(function(){
-    $('#display-content').html(ABOUT_HTML);
-    current_mode = "about";
-    resizeContentTextHeight();
-  });
-  
-  // Checkout Page
-  $('#menu-option-4').click(function(){
-    $('#display-content').html(CART_HTML);
-    renderCart();
-    current_mode = "cart";
-    bindEventsToCartPage();
-  });
-  
-  // Top Right Cart
-  $('#cart-display').click(function(){
-    $('#display-content').html(CART_HTML);
-    renderCart();
-    current_mode = "cart";
-    bindEventsToCartPage();    
-  });
-
-  // END NAVIGATION CONTROLS ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  // BEGIN MENU HOVER EVENTS ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  $("#menu-option-1").mouseenter(function(){
-    $(this).css({"background-color": SALMON_JERKY_MENU_BACKGROUND_COLOR_ON_HOVER});
-  });
-  $("#menu-option-1").mouseleave(function(){
-    $(this).css({"background-color": STANDARD_MENU_BACKGROUND});
-  });  
-  
-  $("#menu-option-2").mouseenter(function(){
-    $(this).css({"background-color": TRAIL_MIX_MENU_BACKGROUND_COLOR_ON_HOVER});
-  });
-  $("#menu-option-2").mouseleave(function(){
-    $(this).css({"background-color": STANDARD_MENU_BACKGROUND});
-  });    
-  
-  $("#menu-option-3").mouseenter(function(){
-    $(this).css({"background-color": ABOUT_MENU_BACKGROUND_COLOR_ON_HOVER});
-  });
-  $("#menu-option-3").mouseleave(function(){
-    $(this).css({"background-color": STANDARD_MENU_BACKGROUND});
-  });      
-  
-  $("#menu-option-4").mouseenter(function(){
-    $(this).css({"background-color": CHECKOUT_MENU_BACKGROUND_COLOR_ON_HOVER});
-  });
-  $("#menu-option-4").mouseleave(function(){
-    $(this).css({"background-color": STANDARD_MENU_BACKGROUND});
-  });        
-  
-  
-  // END MENU HOVER CONTROLS ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-/*  
-  
-
-  // BEGIN INITIAL MESSAGING SEQUENCE //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-  // Initial Message HTML
-  //    "Delivering Wholesome Food to Your Final Frontier"
-  //     - will flash various adjectives before disappearing to show the primary page content
-  $("body").prepend('<div id="initial-message"><span class="missing">Delivering</span><br> <span id="adjectives">Wholesome</span><span class="missing">&nbsp;&nbsp;Food<br>to Your Final Frontier...</span></div>');
-  
-  
-  
-  // step 1) hide content (it will appear after the sequence)
-  $('#content').hide();
-
-  // step 2) show message
-  $('#initial-message').delay(TIME_TO_VIEW_PHOTO_IN_ISOLATION).hide().fadeIn(TIME_FOR_DESCRIPTION_TO_FADE_IN);
-  
-  // step 3) remove non-adjectives
-  $('.missing').delay(TIME_FROM_START_UNTIL_INITIAL_MESSAGE_LOADS).fadeOut(TIME_FOR_FIRST_ADJECTIVE_TO_CHANGE);
-
-
-  // step 4) flash adjectives
-  $("#adjectives").delay(TIME_FROM_START_UNTIL_INITIAL_MESSAGE_LOADS + TIME_FOR_FIRST_ADJECTIVE_TO_CHANGE).fadeOut(0).fadeIn(0, function(){
-    $("#adjectives").text("Nutritious").css({"color": "brown", "font-size": "1.1em"});
-  }).delay(TIME_FOR_SECOND_ADJECTIVE_TO_CHANGE).fadeOut(0).fadeIn(0, function(){
-    $("#adjectives").text("Delicious").css({"color": "rgb(95,219,90)", "font-size": "1.2em"});
-    $('#initial-message').css({ "right": "-4.5%", "top": "22%" });
-  }).delay(TIME_FOR_THIRD_ADJECTIVE_TO_CHANGE).fadeOut(0).fadeIn(0, function(){
-    $('#initial-message').css({ "right": "0%", "top": "26.5%" });
-    $("#adjectives").text("Organic").css({"color": "red", "font-size": "1.3em"});
-  }).delay(TIME_FOR_FOURTH_ADJECTIVE_TO_CHANGE).fadeOut(0).fadeIn(0, function(){
-    $('#initial-message').css({ "top": "17%" });
-    $("#adjectives").text("Anywhere").css({"color": "rgb(219,90,95)", "font-size": "1.63em"});
-  });
-  
-  // step 5) remove message
-  $('#initial-message').delay(TIME_FOR_MESSAGE_TO_WAIT_WHILE_ADJECTIVE_ANIMATIONS_OCCUR).fadeOut(TIME_FOR_DESCRIPTION_TO_DISAPPEAR);
-  
-  // step 6) show content
-  $('#content').delay(TIME_FROM_START_UNTIL_CONTENT_APPEARS).fadeIn(TIME_FOR_DESCRIPTION_TO_DISAPPEAR);
-
-  // END INITIAL MESSAGING SEQUENCE ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-*/
-  
 })
+
+
+var startingHTML1 = `
+      <div id="screen-warning">
+        Please view this content in landscape mode.
+      </div>
+`;
+
+var startingHTML2 = `
+        <div id="cart-display" class="clickable">
+            <span id="cart-tracker">No Items</span> in Cart
+        </div>
+`;
+
+var startingHTML3 = `
+        <div id="display-content">
+          <div class='content-title'><p>Artisanal,<br>Handcrafted <b>Salmon Jerky</b></p></div>
+          
+          <div class = 'content-text'>
+              <div id='jerky-image-container' class="product-image-container clickable">
+                  <img id='jerky-image' class='product-picture' src='Smoked_Salmon.jpg'/>
+                  <br>&nbsp;&nbsp;<b><span id='buy-jerky' class='Add-To-Cart-Below-Image clickable'>Add to Cart</span></b>
+              </div>
+              <div class='product-description' id="jerky-product-description">
+                  Paleo Trek's Salmon are wild caught by native Kanak fishermen off the coast of New Caledonia. These pristine waters of the South Pacific ensure a mouth-watering quality of freshness unmatched in dried seafood culinary artistry. High in Protein. Low in Fat.
+              </div>
+          </div>
+        </div>    
+
+`;
+
+var startingHTML4 = `
+        <div id="menu-title" class="menu">
+            <div id="logo-pic-div"><img id="logo-pic" src="Logo.png"/></div>
+            <!--<span id="menu-title-text-whole"><span id="first-menu-title-inner-span">Paleo</span><span id="second-menu-title-inner-span">Trek</span></span> -->
+        </div>
+        
+        <div id="menu-black-box-1" class="menu"></div>
+        
+        <div id="menu-option-1" class="menu clickable">
+            <h4>Artisanal<br>Salmon Jerky</h4>
+        </div>
+
+        <div id="menu-black-box-2" class="menu"></div>
+
+        <div id="menu-option-2" class="menu clickable">
+            <h4>Imaginative<br>Trail Mix</h4>
+        </div>
+
+        <div id="menu-black-box-3" class="menu"></div>
+
+        <div id="menu-option-3" class="menu clickable">
+            <h4>About</h4>
+        </div>
+
+        <div id="menu-black-box-4" class="menu"></div>
+
+        <div id="menu-option-4" class="menu clickable">
+            <span id="checkout_menu_text"><h4>Checkout</h4></span>
+        </div>
+
+        <div id="menu-black-box-5" class="menu"></div>
+`;

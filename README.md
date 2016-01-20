@@ -1,10 +1,11 @@
-To Do:
-  - Add VMax to Everything
-  - Add Pay Now Button (warn not to give information)
-  - About Page
-  - Swedish Option
-  - Add Read Me Link to script.js
-  - Author Declaration in Bottom Right
+Features:
+
+- Strenuous Attempt at Dynamic Resizing
+- Lots of jQuery Effects
+- Interactive Checkout Mechanisms - Keeps Track of What Has Been Added or Removed from Cart
+- Cart Icon Keeps Track of Cart
+- Interactive Popup Indicating Free Shipping
+- Website Built Almost Entirely Through jQuery (as directed through Project Specs)
 
 
 
