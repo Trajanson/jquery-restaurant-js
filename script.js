@@ -1,3 +1,96 @@
+var startingHTML1 = `
+      <div id="screen-warning">
+        Please view this content in landscape mode.
+      </div>
+`;
+
+var startingHTML2 = `
+        <div id="cart-display" class="clickable">
+            <span id="cart-tracker">No Items</span> in Cart
+        </div>
+`;
+
+var startingHTML3 = `
+        <div id="display-content">
+          <div class='content-title'><p>Artisanal,<br>Handcrafted <b>Salmon Jerky</b></p></div>
+
+          <div class = 'content-text'>
+              <div id='jerky-image-container' class="product-image-container clickable">
+                  <img id='jerky-image' class='product-picture' src='Smoked_Salmon.jpg'/>
+                  <br>&nbsp;&nbsp;<b><span id='buy-jerky' class='Add-To-Cart-Below-Image clickable'>Add to Cart</span></b>
+              </div>
+              <div class='product-description' id="jerky-product-description">
+                  Paleo Trek's Salmon are wild caught by native Kanak fishermen off the coast of New Caledonia. These pristine waters of the South Pacific ensure a mouth-watering quality of freshness unmatched in dried seafood culinary artistry. High in Protein. Low in Fat.
+              </div>
+            <div id="flat-rate-declaration-box"><span id="flat-rate-declaration">
+                <h3>Flat Rate Shipping</h3>
+                <p>Paleo Trek will ship for <b>one</b> price to <u>anywhere</u> in the world!</p>
+            </span></div>
+          </div>
+        </div>
+
+`;
+
+var startingHTML4 = `
+        <div id="menu-title" class="menu">
+            <div id="logo-pic-div"><img id="logo-pic" src="Logo.png"/></div>
+            <!--<span id="menu-title-text-whole"><span id="first-menu-title-inner-span">Paleo</span><span id="second-menu-title-inner-span">Trek</span></span> -->
+        </div>
+
+        <div id="menu-black-box-1" class="menu"></div>
+
+        <div id="menu-option-1" class="menu clickable">
+            <h4>Artisanal<br>Salmon Jerky</h4>
+        </div>
+
+        <div id="menu-black-box-2" class="menu"></div>
+
+        <div id="menu-option-2" class="menu clickable">
+            <h4>Imaginative<br>Trail Mix</h4>
+        </div>
+
+        <div id="menu-black-box-3" class="menu"></div>
+
+        <div id="menu-option-3" class="menu clickable">
+            <h4>About</h4>
+        </div>
+
+        <div id="menu-black-box-4" class="menu"></div>
+
+        <div id="menu-option-4" class="menu clickable">
+            <span id="checkout_menu_text"><h4>Checkout</h4></span>
+        </div>
+
+        <div id="menu-black-box-5" class="menu"></div>
+`;
+
+$.holdReady( true );
+  $("body").append(startingHTML1);
+  $("#content").append(startingHTML2);
+  $("#content").append(startingHTML3);
+  $("#content").append(startingHTML4);
+  $("body").hide();
+setTimeout(function(){
+  $("body").show();
+  $.holdReady( false );
+}, 2000);  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 var current_mode = "home";
 
 
@@ -214,7 +307,7 @@ var disableCartSubmitOrderButton = function(){
 
 const TIME_TO_VIEW_PHOTO_IN_ISOLATION     = 1500;
 
-const TIME_FOR_DESCRIPTION_TO_FADE_IN     = 3500;
+const TIME_FOR_DESCRIPTION_TO_FADE_IN     = 5500;
 
 const TIME_FROM_START_UNTIL_INITIAL_MESSAGE_LOADS    = TIME_TO_VIEW_PHOTO_IN_ISOLATION + TIME_FOR_DESCRIPTION_TO_FADE_IN;
 
@@ -302,7 +395,7 @@ var checkScreenSize = function(){
   if( $(window).height() > $(window).width() ){
     console.log("this was hit");
     $("#content").hide();
-    $("#screen-warning").show();
+    $("#screen-warning").show();  
   } else{
     $("#content").show();
     $('#screen-warning').hide();
@@ -474,12 +567,6 @@ const EMPTY_CART_HTML = `
 
 
 $(document).ready(function(){
-  $("#content").append(startingHTML2);
-  $(startingHTML3).appendTo("#content");
-  $("#content").append(startingHTML4);
-  $("#content").prepend(startingHTML1);
-
-
 
       setProductPurchaseButton();
 
@@ -650,7 +737,13 @@ $(document).ready(function(){
     // Initial Message HTML
     //    "Delivering Wholesome Food to Your Final Frontier"
     //     - will flash various adjectives before disappearing to show the primary page content
-    $("body").prepend('<div id="initial-message"><span class="missing">Delivering</span><br> <span id="adjectives">Wholesome</span><span class="missing">&nbsp;&nbsp;Food<br>to Your Final Frontier...</span></div>');
+    $("body").prepend(`
+      <div id="initial-message">
+      <span class="missing">Delivering</span><br>
+      <span id="adjectives">Wholesome</span><span class="missing">&nbsp;&nbsp;Food<br>
+      to Your Final Frontier...</span>
+      </div>
+    `);
 
 
 
@@ -666,16 +759,16 @@ $(document).ready(function(){
 
     // step 4) flash adjectives
     $("#adjectives").delay(TIME_FROM_START_UNTIL_INITIAL_MESSAGE_LOADS + TIME_FOR_FIRST_ADJECTIVE_TO_CHANGE).fadeOut(0).fadeIn(0, function(){
-      $("#adjectives").text("Nutritious").css({"color": "brown", "font-size": "1.1em"});
+      $("#adjectives").text("Nutritious").css({"color": "brown", "font-size": "1.15em"});
     }).delay(TIME_FOR_SECOND_ADJECTIVE_TO_CHANGE).fadeOut(0).fadeIn(0, function(){
-      $("#adjectives").text("Delicious").css({"color": "rgb(95,219,90)", "font-size": "1.2em"});
+      $("#adjectives").text("Delicious").css({"color": "rgb(95,219,90)", "font-size": "1.25em"});
       $('#initial-message').css({ "right": "-4.5%", "top": "22%" });
     }).delay(TIME_FOR_THIRD_ADJECTIVE_TO_CHANGE).fadeOut(0).fadeIn(0, function(){
       $('#initial-message').css({ "right": "0%", "top": "26.5%" });
-      $("#adjectives").text("Organic").css({"color": "red", "font-size": "1.3em"});
+      $("#adjectives").text("Organic").css({"color": "red", "font-size": "1.35em"});
     }).delay(TIME_FOR_FOURTH_ADJECTIVE_TO_CHANGE).fadeOut(0).fadeIn(0, function(){
       $('#initial-message').css({ "top": "17%" });
-      $("#adjectives").text("Anywhere").css({"color": "rgb(219,90,95)", "font-size": "1.63em"});
+      $("#adjectives").text("Anywhere").css({"color": "rgb(219,90,95)", "font-size": "1.75em"});
     });
 
     // step 5) remove message
@@ -689,66 +782,3 @@ $(document).ready(function(){
 
 
 })
-
-
-var startingHTML1 = `
-      <div id="screen-warning">
-        Please view this content in landscape mode.
-      </div>
-`;
-
-var startingHTML2 = `
-        <div id="cart-display" class="clickable">
-            <span id="cart-tracker">No Items</span> in Cart
-        </div>
-`;
-
-var startingHTML3 = `
-        <div id="display-content">
-          <div class='content-title'><p>Artisanal,<br>Handcrafted <b>Salmon Jerky</b></p></div>
-
-          <div class = 'content-text'>
-              <div id='jerky-image-container' class="product-image-container clickable">
-                  <img id='jerky-image' class='product-picture' src='Smoked_Salmon.jpg'/>
-                  <br>&nbsp;&nbsp;<b><span id='buy-jerky' class='Add-To-Cart-Below-Image clickable'>Add to Cart</span></b>
-              </div>
-              <div class='product-description' id="jerky-product-description">
-                  Paleo Trek's Salmon are wild caught by native Kanak fishermen off the coast of New Caledonia. These pristine waters of the South Pacific ensure a mouth-watering quality of freshness unmatched in dried seafood culinary artistry. High in Protein. Low in Fat.
-              </div>
-          </div>
-        </div>
-
-`;
-
-var startingHTML4 = `
-        <div id="menu-title" class="menu">
-            <div id="logo-pic-div"><img id="logo-pic" src="Logo.png"/></div>
-            <!--<span id="menu-title-text-whole"><span id="first-menu-title-inner-span">Paleo</span><span id="second-menu-title-inner-span">Trek</span></span> -->
-        </div>
-
-        <div id="menu-black-box-1" class="menu"></div>
-
-        <div id="menu-option-1" class="menu clickable">
-            <h4>Artisanal<br>Salmon Jerky</h4>
-        </div>
-
-        <div id="menu-black-box-2" class="menu"></div>
-
-        <div id="menu-option-2" class="menu clickable">
-            <h4>Imaginative<br>Trail Mix</h4>
-        </div>
-
-        <div id="menu-black-box-3" class="menu"></div>
-
-        <div id="menu-option-3" class="menu clickable">
-            <h4>About</h4>
-        </div>
-
-        <div id="menu-black-box-4" class="menu"></div>
-
-        <div id="menu-option-4" class="menu clickable">
-            <span id="checkout_menu_text"><h4>Checkout</h4></span>
-        </div>
-
-        <div id="menu-black-box-5" class="menu"></div>
-`;
